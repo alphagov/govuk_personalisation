@@ -3,10 +3,16 @@
 /_yardoc/
 /coverage/
 /doc/
+/log/*.log
 /pkg/
 /spec/reports/
 /tmp/
+
+/spec/test_app/log/*.log
+/spec/test_app/storage/
+/spec/test_app/tmp/
+
 Gemfile.lock
 
 # rspec failure tracking
-.rspec_status
+/spec/examples.txt
