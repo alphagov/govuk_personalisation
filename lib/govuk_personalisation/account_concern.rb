@@ -13,6 +13,7 @@ module GovukPersonalisation
 
     included do
       before_action :fetch_account_session_header
+      before_action :set_account_vary_header
       attr_accessor :account_session_header
     end
 
@@ -27,6 +28,10 @@ module GovukPersonalisation
         elsif Rails.env.development?
           cookies[ACCOUNT_SESSION_DEV_COOKIE_NAME]
         end
+    end
+
+    def set_account_vary_header
+      response.headers["Vary"] = [response.headers["Vary"], ACCOUNT_SESSION_RESPONSE_HEADER_NAME].compact.join(", ")
     end
 
     def set_account_session_header(govuk_account_session = nil)

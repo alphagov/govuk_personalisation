@@ -12,6 +12,7 @@ RSpec.describe "Sessions", type: :request do
 
         expect(response).to have_http_status(:ok)
         expect(response_body).to eq("logged_in" => false, "account_session_header" => nil)
+        expect(response.headers["Vary"]).to eq("GOVUK-Account-Session")
       end
     end
 
@@ -24,6 +25,7 @@ RSpec.describe "Sessions", type: :request do
 
         expect(response).to have_http_status(:ok)
         expect(response_body).to eq("logged_in" => true, "account_session_header" => account_session_header)
+        expect(response.headers["Vary"]).to eq("GOVUK-Account-Session")
       end
     end
   end
@@ -34,6 +36,7 @@ RSpec.describe "Sessions", type: :request do
 
       expect(response).to have_http_status(:no_content)
       expect(response.headers["GOVUK-Account-Session"]).to eq("bar")
+      expect(response.headers["Vary"]).to eq("GOVUK-Account-Session")
       expect(response.body.blank?)
     end
   end
@@ -44,6 +47,7 @@ RSpec.describe "Sessions", type: :request do
 
       expect(response).to have_http_status(:no_content)
       expect(response.headers["GOVUK-Account-End-Session"]).to eq("1")
+      expect(response.headers["Vary"]).to eq("GOVUK-Account-Session")
       expect(response.body.blank?)
     end
   end
