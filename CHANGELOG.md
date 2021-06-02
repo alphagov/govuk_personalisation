@@ -1,4 +1,4 @@
-# unreleased
+# 0.3.0
 
 - Always set `Vary: GOVUK-Account-Session` response header ([#4](https://github.com/alphagov/govuk_personalisation/pull/4))
 
