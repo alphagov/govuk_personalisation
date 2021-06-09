@@ -1,3 +1,7 @@
+# 0.5.0
+
+- Rename header name constants ([#7](https://github.com/alphagov/govuk_personalisation/pull/7))
+
 # 0.4.0
 
 - Add ability to set GOVUK-Account-Session ([#6](https://github.com/alphagov/govuk_personalisation/pull/6))
