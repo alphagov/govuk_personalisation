@@ -3,7 +3,7 @@
 require "active_support/concern"
 
 module GovukPersonalisation
-  module AccountConcern
+  module ControllerConcern
     extend ActiveSupport::Concern
 
     ACCOUNT_SESSION_INTERNAL_HEADER_NAME = "HTTP_GOVUK_ACCOUNT_SESSION"
