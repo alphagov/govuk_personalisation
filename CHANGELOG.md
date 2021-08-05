@@ -1,3 +1,7 @@
+# unreleased
+
+- Add `GovukPersonalisation::Flash` and helper methods to the concern ([#9](https://github.com/alphagov/govuk_personalisation/pull/9))
+
 # 0.5.0
 
 - Rename header name constants ([#7](https://github.com/alphagov/govuk_personalisation/pull/7))
