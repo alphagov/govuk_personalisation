@@ -18,10 +18,16 @@ module GovukPersonalisation
       attr_reader :account_flash
     end
 
-    def logged_in?
-      account_session_header.present?
-    end
-
+    # Read the `GOVUK-Account-Session` request header and set the
+    # `@account_session_header` and `@account_flash` variables.  Also
+    # sets a response header with an empty flash if there is a flash
+    # in the request.
+    #
+    # This is called as a `before_action`
+    #
+    # This should not be called after either of the
+    # `@govuk_account_session` or flash to return to the user have
+    # been changed, as those changes will be overwritten.
     def fetch_account_session_header
       session_with_flash =
         if request.headers[ACCOUNT_SESSION_INTERNAL_HEADER_NAME]
@@ -37,10 +43,40 @@ module GovukPersonalisation
       set_account_session_header unless @account_flash.empty?
     end
 
+    # Set the `Vary: GOVUK-Account-Session` response header.
+    #
+    # This is called as a `before_action`, to ensure that pages
+    # rendered using one user's session are not served to another by
+    # our CDN.  You should only skip this action if you are certain
+    # that the response does not include any personalisation, or if
+    # you prevent caching in some other way (for example, with
+    # `Cache-Control: no-store`).
     def set_account_vary_header
       response.headers["Vary"] = [response.headers["Vary"], ACCOUNT_SESSION_HEADER_NAME].compact.join(", ")
     end
 
+    # Check if the user has a session.
+    #
+    # This does not call account-api to verify that the session is
+    # valid, but an invalid session would not allow a user to access
+    # any personal data anyway.
+    #
+    # @return [true, false] whether the user has a session
+    def logged_in?
+      account_session_header.present?
+    end
+
+    # Set a new session header.
+    #
+    # This should be called after any API call to account-api which
+    # returns a new session value.  This is called automatically after
+    # updating the flash with `account_flash_add` or
+    # `account_flash_keep`
+    #
+    # Calling this after calling `logout!` will not prevent the user
+    # from being logged out.
+    #
+    # @param govuk_account_session [String, nil] the new session identifier
     def set_account_session_header(govuk_account_session = nil)
       @account_session_header = govuk_account_session if govuk_account_session
 
@@ -55,6 +91,8 @@ module GovukPersonalisation
       end
     end
 
+    # Clear the `@account_session_header` and set the logout response
+    # header.
     def logout!
       response.headers[ACCOUNT_END_SESSION_HEADER_NAME] = "1"
       @account_session_header = nil
