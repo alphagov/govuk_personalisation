@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  include GovukPersonalisation::AccountConcern
+  include GovukPersonalisation::ControllerConcern
 
   def show
     render json: { logged_in: logged_in?, account_session_header: account_session_header }

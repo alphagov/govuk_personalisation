@@ -3,6 +3,7 @@
 - Add `GovukPersonalisation::Flash` and helper methods to the concern ([#9](https://github.com/alphagov/govuk_personalisation/pull/9))
 - Ensure every method has RDoc ([#10](https://github.com/alphagov/govuk_personalisation/pull/10))
 - Remove unused `GovukPersonalisation::Error` class ([#10](https://github.com/alphagov/govuk_personalisation/pull/10))
+- BREAKING: Rename `GovukPersonalisation::AccountConcern` to `GovukPersonalisation::ControllerConcern` ([#11](https://github.com/alphagov/govuk_personalisation/pull/11))
 
 # 0.5.0
 
