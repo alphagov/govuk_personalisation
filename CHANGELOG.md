@@ -1,4 +1,4 @@
-# unreleased
+# 0.6.0
 
 - Add `GovukPersonalisation::Flash` and helper methods to the concern ([#9](https://github.com/alphagov/govuk_personalisation/pull/9))
 - Ensure every method has RDoc ([#10](https://github.com/alphagov/govuk_personalisation/pull/10))
