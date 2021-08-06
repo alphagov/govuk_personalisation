@@ -7,6 +7,8 @@ class SessionsController < ApplicationController
 
   def update
     set_account_session_header params[:new_session_header]
+    account_flash_keep if params[:keep_flash]
+    account_flash_add params[:add_to_flash]
     head :no_content
   end
 

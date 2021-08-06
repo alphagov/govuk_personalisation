@@ -27,6 +27,16 @@ RSpec.describe "Sessions", type: :request do
         expect(response_body).to eq("logged_in" => true, "account_session_header" => account_session_header)
         expect(response.headers["Vary"]).to eq("GOVUK-Account-Session")
       end
+
+      context "when there is a flash in the user's session" do
+        let(:account_session_header) { "#{session_id}$$flash" }
+        let(:session_id) { "foo" }
+
+        it "returns an empty flash in the response" do
+          get show_session_path, headers: headers
+          expect(response.headers["GOVUK-Account-Session"]).to eq(session_id)
+        end
+      end
     end
   end
 
@@ -38,6 +48,19 @@ RSpec.describe "Sessions", type: :request do
       expect(response.headers["GOVUK-Account-Session"]).to eq("bar")
       expect(response.headers["Vary"]).to eq("GOVUK-Account-Session")
       expect(response.body.blank?)
+    end
+
+    it "preserves the flash" do
+      session_with_flash = "foo$$flash,messages"
+      get update_session_path, headers: { "GOVUK-Account-Session" => session_with_flash }, params: { keep_flash: "1" }
+
+      expect(response.headers["GOVUK-Account-Session"]).to eq(session_with_flash)
+    end
+
+    it "updates the flash" do
+      get update_session_path, headers: { "GOVUK-Account-Session" => "foo$$flash,messages" }, params: { add_to_flash: "new-flash-message" }
+
+      expect(response.headers["GOVUK-Account-Session"]).to eq("foo$$new-flash-message")
     end
   end
 
