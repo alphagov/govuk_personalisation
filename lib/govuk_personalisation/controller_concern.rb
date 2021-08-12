@@ -29,18 +29,20 @@ module GovukPersonalisation
     # `@govuk_account_session` or flash to return to the user have
     # been changed, as those changes will be overwritten.
     def fetch_account_session_header
-      session_with_flash =
+      session_header =
         if request.headers[ACCOUNT_SESSION_INTERNAL_HEADER_NAME]
           request.headers[ACCOUNT_SESSION_INTERNAL_HEADER_NAME].presence
         elsif Rails.env.development?
           cookies[ACCOUNT_SESSION_DEV_COOKIE_NAME]
         end
 
-      @account_session_header, flash = GovukPersonalisation::Flash.decode_session(session_with_flash)
-      @account_flash = (flash || []).index_with { |_| true }
+      account_session = GovukPersonalisation::Session.decode(session_header)
+      @account_session_header = account_session[:header]
+      @account_authenticity_token = account_session[:authenticity_token]
+      @account_flash = account_session[:flash]
       @new_account_flash = {}
 
-      set_account_session_header unless @account_flash.empty?
+      set_account_session_header unless @account_flash.blank?
     end
 
     # Set the `Vary: GOVUK-Account-Session` response header.
@@ -77,10 +79,15 @@ module GovukPersonalisation
     # from being logged out.
     #
     # @param govuk_account_session [String, nil] the new session identifier
-    def set_account_session_header(govuk_account_session = nil)
+    # @param authenticity_token    [String, nil] authenticity token to encode in the session, should only be set at the point of authentication
+    def set_account_session_header(govuk_account_session = nil, authenticity_token: nil)
       @account_session_header = govuk_account_session if govuk_account_session
 
-      session_with_flash = GovukPersonalisation::Flash.encode_session(@account_session_header, @new_account_flash.keys)
+      session_with_flash = GovukPersonalisation::Session.encode(
+        authenticity_token: authenticity_token,
+        header: @account_session_header,
+        flash: @new_account_flash,
+      )
 
       response.headers[ACCOUNT_SESSION_HEADER_NAME] = session_with_flash
       if Rails.env.development?

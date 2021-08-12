@@ -1,40 +1,32 @@
 # frozen_string-literal: true
 
 module GovukPersonalisation::Flash
-  SESSION_SEPARATOR = "$$"
-  MESSAGE_SEPARATOR = ","
-  MESSAGE_REGEX = /\A[a-zA-Z0-9._\-]+\z/.freeze
+  SEPARATOR = ","
+  REGEX = /\A[a-zA-Z0-9._\-]+\z/.freeze
 
-  # Splits the session header into a session value (suitable for using
-  # in account-api calls) and flash messages.
+  # Splits an encoded string of flash messages into an object with
+  # keys being messages and values being `true`.
   #
-  # @param encoded_session [String] the value of the `GOVUK-Account-Session` header
+  # @param encoded_session [String] the encoded flash messages
   #
-  # @return [Array(String, Array<String>), nil] the session value and the flash messages
-  def self.decode_session(encoded_session)
-    session_bits = encoded_session&.split(SESSION_SEPARATOR)
-    return if session_bits.blank?
+  # @return [Hash<String, true>] the flash messages
+  def self.decode(encoded_flash)
+    messages = encoded_flash&.split(SEPARATOR) || []
+    return if messages.blank?
 
-    if session_bits.length == 1
-      [session_bits[0], []]
-    else
-      [session_bits[0], session_bits[1].split(MESSAGE_SEPARATOR)]
-    end
+    messages.index_with { |_| true }
   end
 
-  # Encodes the session value and a list of flash messages into a
-  # session header which can be returned to the user.
+  # Encodes a flash hash into a string which can be embedded into the
+  # session header.
   #
-  # @param session [String]        the session value
-  # @param flash   [Array<String>] the flash messages, which must all be `valid_message?`
+  # @param flash [Hash<String, true>] the flash messages, which must all be `valid_message?`
   #
-  # @return [String] the encoded session header value
-  def self.encode_session(session, flash)
-    if flash.blank?
-      session
-    else
-      "#{session}#{SESSION_SEPARATOR}#{flash.join(MESSAGE_SEPARATOR)}"
-    end
+  # @return [String] the flash value
+  def self.encode(flash)
+    return if flash.blank?
+
+    flash.keys.join(SEPARATOR)
   end
 
   # Check if a string is valid as a flash message.
@@ -45,6 +37,6 @@ module GovukPersonalisation::Flash
   def self.valid_message?(message)
     return false if message.nil?
 
-    message.match? MESSAGE_REGEX
+    message.match? REGEX
   end
 end
