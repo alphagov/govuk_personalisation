@@ -1,6 +1,7 @@
 # unreleased
 
 - BREAKING: Move session encoding / decoding out of `GovukPersonalisation::Flash` and into `GovukPersonalisation::Session`
+- Add `verify_account_authenticity_token` method to protect against CSRF in OAuth journeys
 
 # 0.6.0
 

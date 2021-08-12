@@ -1,8 +1,16 @@
 class SessionsController < ApplicationController
   include GovukPersonalisation::ControllerConcern
 
+  before_action :verify_account_authenticity_token, only: %i[callback]
+
+  rescue_from GovukPersonalisation::ControllerConcern::InvalidAccountAuthenticityToken, with: -> { head :bad_request }
+
   def show
     render json: { logged_in: logged_in?, account_session_header: account_session_header }
+  end
+
+  def callback
+    head :no_content
   end
 
   def update

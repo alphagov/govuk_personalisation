@@ -74,4 +74,21 @@ RSpec.describe "Sessions", type: :request do
       expect(response.body.blank?)
     end
   end
+
+  describe "GET /callback" do
+    it "throws an error if the authenticity token is missing" do
+      get callback_session_path
+      expect(response).to have_http_status(:bad_request)
+    end
+
+    it "throws an error if the authenticity token does not match" do
+      get callback_session_path, headers: { "GOVUK-Account-Session" => "csrf_token1" }, params: { account_authenticity_token: "token2" }
+      expect(response).to have_http_status(:bad_request)
+    end
+
+    it "does not throw an error if the tokens match" do
+      get callback_session_path, headers: { "GOVUK-Account-Session" => "csrf_token" }, params: { account_authenticity_token: "token" }
+      expect(response).to be_successful
+    end
+  end
 end

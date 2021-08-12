@@ -1,10 +1,16 @@
 # frozen_string_literal: true
 
+require "action_controller/metal/request_forgery_protection"
 require "active_support/concern"
 
 module GovukPersonalisation
   module ControllerConcern
     extend ActiveSupport::Concern
+
+    # Exception raised by `verify_account_authenticity_token` if the
+    # token in the session does not match the
+    # `account_authenticity_token` parameter.
+    class InvalidAccountAuthenticityToken < ActionController::InvalidAuthenticityToken; end
 
     ACCOUNT_SESSION_INTERNAL_HEADER_NAME = "HTTP_GOVUK_ACCOUNT_SESSION"
     ACCOUNT_SESSION_HEADER_NAME = "GOVUK-Account-Session"
@@ -55,6 +61,18 @@ module GovukPersonalisation
     # `Cache-Control: no-store`).
     def set_account_vary_header
       response.headers["Vary"] = [response.headers["Vary"], ACCOUNT_SESSION_HEADER_NAME].compact.join(", ")
+    end
+
+    # Check the authenticity token stored in the account session.
+    #
+    # This should be used for methods which a user may be redirected
+    # to after authenticating, as such a redirect will be a GET
+    # request.
+    #
+    # Throws `InvalidAccountAuthenticityToken` if the token is missing or not correct.
+    def verify_account_authenticity_token
+      raise InvalidAccountAuthenticityToken if params[:account_authenticity_token].blank?
+      raise InvalidAccountAuthenticityToken unless params[:account_authenticity_token] == @account_authenticity_token
     end
 
     # Check if the user has a session.
