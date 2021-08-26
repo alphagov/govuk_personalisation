@@ -25,9 +25,11 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = %w[lib]
 
+  spec.add_dependency "plek", ">= 1.9.0"
   spec.add_dependency "rails", "~> 6"
 
   spec.add_development_dependency "bundler"
+  spec.add_development_dependency "climate_control"
   spec.add_development_dependency "pry-byebug"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec-rails"

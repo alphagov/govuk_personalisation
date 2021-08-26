@@ -1,3 +1,7 @@
+# unreleased
+
+- Add `GovukPersonalisation::Urls` module ([#14](https://github.com/alphagov/govuk_personalisation/pull/14))
+
 # 0.6.0
 
 - Add `GovukPersonalisation::Flash` and helper methods to the concern ([#9](https://github.com/alphagov/govuk_personalisation/pull/9))
