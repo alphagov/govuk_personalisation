@@ -1,4 +1,4 @@
-# unreleased
+# 0.7.0
 
 - Add `GovukPersonalisation::Urls` module ([#14](https://github.com/alphagov/govuk_personalisation/pull/14))
 
