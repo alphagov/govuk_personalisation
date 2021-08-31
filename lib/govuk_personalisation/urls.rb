@@ -36,6 +36,13 @@ module GovukPersonalisation::Urls
     find_external_url(var: "SECURITY", application: "account-manager", path: "/account/security")
   end
 
+  # Find the external URL for the "feedback" page
+  #
+  # @return [String] the URL
+  def self.feedback
+    find_external_url(var: "FEEDBACK", application: "account-manager", path: "/feedback")
+  end
+
   # Finds a URL on www.gov.uk.  This method is used so we can have
   # links which work both in production (where the website root is
   # returned) and in local development (where an application URL is
