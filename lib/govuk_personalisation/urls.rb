@@ -5,7 +5,7 @@ module GovukPersonalisation::Urls
   #
   # @return [String] the URL
   def self.sign_in
-    find_govuk_url(var: "SIGN_IN", application: "frontend", path: "/sign-in")
+    find_govuk_url(var: "SIGN_IN", application: "frontend", path: "/sign-in/redirect")
   end
 
   # Find the GOV.UK URL for the "sign out" page

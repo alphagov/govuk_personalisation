@@ -1,3 +1,7 @@
+# unreleased
+
+- Change sign in path to `/sign-in/redirect` ([#17](https://github.com/alphagov/govuk_personalisation/pull/17))
+
 # 0.7.0
 
 - Add `GovukPersonalisation::Urls` module ([#14](https://github.com/alphagov/govuk_personalisation/pull/14) [#16](https://github.com/alphagov/govuk_personalisation/pull/16))
