@@ -1,4 +1,4 @@
-# unreleased
+# 0.8.0
 
 - Change sign in path to `/sign-in/redirect` ([#17](https://github.com/alphagov/govuk_personalisation/pull/17))
 
