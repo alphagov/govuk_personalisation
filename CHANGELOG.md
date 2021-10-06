@@ -1,3 +1,7 @@
+# Unreleased
+- Add `redirect_with_analytics` helper, attaches _ga and cookie_consent values from existing params to redirects.
+- Add `GovukPersonalisation::Redirect` and `.build_url` helper to construct valid URLs with additional parameters
+
 # 0.8.0
 
 - Change sign in path to `/sign-in/redirect` ([#17](https://github.com/alphagov/govuk_personalisation/pull/17))
