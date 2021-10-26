@@ -1,4 +1,4 @@
-# Unreleased
+# 0.10.0
 - Add `url_with_analytics` helper to allow apps to access the URL used for `redirect_with_analytics` ([#22](https://github.com/alphagov/govuk_personalisation/pull/22))
 
 # 0.9.0
