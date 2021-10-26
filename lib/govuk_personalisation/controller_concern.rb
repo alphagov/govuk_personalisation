@@ -131,7 +131,15 @@ module GovukPersonalisation
     #
     # @param url [String] The URL to redirect to
     def redirect_with_analytics(url)
-      redirect_to GovukPersonalisation::Redirect.build_url(url, params.permit(:_ga, :cookie_consent).to_h)
+      redirect_to url_with_analytics(url)
+    end
+
+    # Build a URL adding parameters necessary for cross-domain analytics
+    # and cookie consent
+    #
+    # @param url [String] The URL
+    def url_with_analytics(url)
+      GovukPersonalisation::Redirect.build_url(url, params.permit(:_ga, :cookie_consent).to_h)
     end
   end
 end
