@@ -83,6 +83,8 @@ module GovukPersonalisation
       session_with_flash = GovukPersonalisation::Flash.encode_session(@account_session_header, @new_account_flash.keys)
 
       response.headers[ACCOUNT_SESSION_HEADER_NAME] = session_with_flash
+      response.headers["Cache-Control"] = "no-store"
+
       if Rails.env.development?
         cookies[ACCOUNT_SESSION_DEV_COOKIE_NAME] = {
           value: session_with_flash,
@@ -95,7 +97,10 @@ module GovukPersonalisation
     # header.
     def logout!
       response.headers[ACCOUNT_END_SESSION_HEADER_NAME] = "1"
+      response.headers["Cache-Control"] = "no-store"
+
       @account_session_header = nil
+
       if Rails.env.development?
         cookies[ACCOUNT_SESSION_DEV_COOKIE_NAME] = {
           value: "",
