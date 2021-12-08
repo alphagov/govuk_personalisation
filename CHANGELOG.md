@@ -1,4 +1,4 @@
-# unreleased
+# 0.11.0
 
 - Remove references to the account manager from the URLs module ([#26](https://github.com/alphagov/govuk_personalisation/pull/26))
 
