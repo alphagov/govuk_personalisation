@@ -38,14 +38,13 @@ RSpec.describe GovukPersonalisation::Urls do
   end
 
   describe "#find_external_url" do
-    subject(:url) { GovukPersonalisation::Urls.find_external_url(var: var, application: application, path: path) }
+    subject(:url) { GovukPersonalisation::Urls.find_external_url(var: var, url: given_url) }
 
     let(:var) { "TEST" }
-    let(:application) { "test-external-app" }
-    let(:path) { "/account/path" }
+    let(:given_url) { "https://www.example.com" }
 
-    it "constructs a URL based on the application" do
-      expect(url).to eq("#{Plek.find(application)}#{path}")
+    it "uses the given URL" do
+      expect(url).to eq(given_url)
     end
 
     context "when the env var is set" do
