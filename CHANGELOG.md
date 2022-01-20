@@ -1,3 +1,7 @@
+# 0.11.1
+
+- Change sign in path to `/account` ([#28](https://github.com/alphagov/govuk_personalisation/pull/28))
+
 # 0.11.0
 
 - Remove references to the account manager from the URLs module ([#26](https://github.com/alphagov/govuk_personalisation/pull/26))
