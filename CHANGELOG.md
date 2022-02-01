@@ -1,3 +1,7 @@
+# unreleased
+
+- Upgrade to Rails 7
+
 # 0.11.1
 
 - Change sign in path to `/account` ([#28](https://github.com/alphagov/govuk_personalisation/pull/28))
