@@ -1,3 +1,7 @@
+# unreleased
+
+- Add support for Rails 7 ([#33](https://github.com/alphagov/govuk_personalisation/pull/33))
+
 # 0.11.1
 
 - Change sign in path to `/account` ([#28](https://github.com/alphagov/govuk_personalisation/pull/28))
