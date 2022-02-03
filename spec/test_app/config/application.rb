@@ -12,7 +12,7 @@ require "action_controller/railtie"
 # require "action_text/engine"
 require "action_view/railtie"
 # require "action_cable/engine"
-require "sprockets/railtie"
+# require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
 require "govuk_personalisation"
@@ -23,8 +23,12 @@ Bundler.require(*Rails.groups)
 
 module TestApp
   class Application < Rails::Application
-    # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.1
+    case Rails::VERSION::MAJOR
+    when 7
+      config.load_defaults 7.0
+    when 6
+      config.load_defaults 6.0
+    end
 
     # Configuration for the application, engines, and railties goes here.
     #
