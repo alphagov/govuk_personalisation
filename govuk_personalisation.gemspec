@@ -26,7 +26,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = %w[lib]
 
   spec.add_dependency "plek", ">= 1.9.0"
-  spec.add_dependency "rails", "~> 6"
+  spec.add_dependency "rails", ">= 6", "< 8"
 
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "climate_control"
