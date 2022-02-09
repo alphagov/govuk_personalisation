@@ -1,4 +1,4 @@
-# unreleased
+# 0.11.2
 
 - Add support for Rails 7 ([#33](https://github.com/alphagov/govuk_personalisation/pull/33))
 
