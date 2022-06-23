@@ -15,11 +15,11 @@ module GovukPersonalisation::Urls
     find_govuk_url(var: "SIGN_OUT", application: "frontend", path: "/sign-out")
   end
 
-  # Find the GOV.UK URL for the "your account" page
+  # Find the external URL for the "your account" page
   #
   # @return [String] the URL
   def self.your_account
-    find_govuk_url(var: "YOUR_ACCOUNT", application: "frontend", path: "/account/home")
+    find_external_url(var: "YOUR_ACCOUNT", url: "https://#{digital_identity_domain}")
   end
 
   # Find the external URL for the "manage" page

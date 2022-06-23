@@ -1,3 +1,7 @@
+# Unreleased
+
+- Set account home to Digital Identity URI ([#36](https://github.com/alphagov/govuk_personalisation/pull/36))
+
 # 0.11.2
 
 - Add support for Rails 7 ([#33](https://github.com/alphagov/govuk_personalisation/pull/33))
