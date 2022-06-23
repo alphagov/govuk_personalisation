@@ -15,6 +15,13 @@ module GovukPersonalisation::Urls
     find_govuk_url(var: "SIGN_OUT", application: "frontend", path: "/sign-out")
   end
 
+  # Find the GOV.UK URL for the "email manager" page
+  #
+  # @return [String] the URL
+  def self.manage_email
+    find_govuk_url(var: "SIGN_OUT", application: "email-alert-frontend", path: "/email/manage")
+  end
+
   # Find the external URL for the "your account" page
   #
   # @return [String] the URL
