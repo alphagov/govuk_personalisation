@@ -1,6 +1,8 @@
 # Unreleased
 
 - Set account home to Digital Identity URI ([#36](https://github.com/alphagov/govuk_personalisation/pull/36))
+- Add `GovukPersonalisation::Urls.manage_email` link ([#38](https://github.com/alphagov/govuk_personalisation/pull/38))
+
 
 # 0.11.2
 
