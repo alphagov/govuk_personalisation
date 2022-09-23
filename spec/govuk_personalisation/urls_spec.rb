@@ -2,7 +2,7 @@ require "climate_control"
 
 RSpec.describe GovukPersonalisation::Urls do
   describe "#find_govuk_url" do
-    subject(:url) { GovukPersonalisation::Urls.find_govuk_url(var: var, application: application, path: path) }
+    subject(:url) { described_class.find_govuk_url(var: var, application: application, path: path) }
 
     let(:var) { "TEST" }
     let(:application) { "test-frontend-app" }
@@ -38,7 +38,7 @@ RSpec.describe GovukPersonalisation::Urls do
   end
 
   describe "#find_external_url" do
-    subject(:url) { GovukPersonalisation::Urls.find_external_url(var: var, url: given_url) }
+    subject(:url) { described_class.find_external_url(var: var, url: given_url) }
 
     let(:var) { "TEST" }
     let(:given_url) { "https://www.example.com" }
