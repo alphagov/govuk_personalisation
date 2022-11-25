@@ -7,7 +7,6 @@
 - Set account home to Digital Identity URI ([#36](https://github.com/alphagov/govuk_personalisation/pull/36))
 - Add `GovukPersonalisation::Urls.manage_email` link ([#38](https://github.com/alphagov/govuk_personalisation/pull/38))
 
-
 # 0.11.2
 
 - Add support for Rails 7 ([#33](https://github.com/alphagov/govuk_personalisation/pull/33))
@@ -25,10 +24,12 @@
 - Make session-change events uncacheable ([#24](https://github.com/alphagov/govuk_personalisation/pull/24))
 
 # 0.10.0
+
 - Add `url_with_analytics` helper to allow apps to access the URL used for `redirect_with_analytics` ([#22](https://github.com/alphagov/govuk_personalisation/pull/22))
 
 # 0.9.0
-- Add `redirect_with_analytics` helper, attaches _ga and cookie_consent values from existing params to redirects. ([#19](https://github.com/alphagov/govuk_personalisation/pull/19))
+
+- Add `redirect_with_analytics` helper, attaches \_ga and cookie_consent values from existing params to redirects. ([#19](https://github.com/alphagov/govuk_personalisation/pull/19))
 - Add `GovukPersonalisation::Redirect` and `.build_url` helper to construct valid URLs with additional parameters. ([#19](https://github.com/alphagov/govuk_personalisation/pull/19))
 
 # 0.8.0
