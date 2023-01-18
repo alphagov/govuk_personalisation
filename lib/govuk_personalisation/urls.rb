@@ -97,9 +97,9 @@ module GovukPersonalisation::Urls
   def self.digital_identity_domain
     environment = ENV["DIGITAL_IDENTITY_ENVIRONMENT"]
     if environment
-      "#{environment}.account.gov.uk"
+      "home.#{environment}.account.gov.uk"
     else
-      "account.gov.uk"
+      "home.account.gov.uk"
     end
   end
 end
