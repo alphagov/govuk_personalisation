@@ -1,3 +1,7 @@
+# Unreleased
+
+* Drop support for Ruby 2.7.
+
 # 0.13.0
 
 - Minimum Ruby version is now 2.7.6 ([#39](https://github.com/alphagov/govuk_personalisation/pull/39))
