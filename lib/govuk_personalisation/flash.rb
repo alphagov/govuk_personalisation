@@ -3,7 +3,7 @@
 module GovukPersonalisation::Flash
   SESSION_SEPARATOR = "$$"
   MESSAGE_SEPARATOR = ","
-  MESSAGE_REGEX = /\A[a-zA-Z0-9._-]+\z/.freeze
+  MESSAGE_REGEX = /\A[a-zA-Z0-9._-]+\z/
 
   # Splits the session header into a session value (suitable for using
   # in account-api calls) and flash messages.
