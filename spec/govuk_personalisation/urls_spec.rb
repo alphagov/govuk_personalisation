@@ -61,4 +61,48 @@ RSpec.describe GovukPersonalisation::Urls do
       end
     end
   end
+
+  describe "#digital_identity_domain" do
+    subject(:url) { described_class.digital_identity_domain }
+
+    it "returns the domain hostname" do
+      expect(url).to eq("home.account.gov.uk")
+    end
+
+    context "when the DIGITAL_IDENTITY_ENVIRONMENT env var is set" do
+      around do |example|
+        ClimateControl.modify("DIGITAL_IDENTITY_ENVIRONMENT" => "production") do
+          example.run
+        end
+      end
+
+      it "constructs the hostname from the env var" do
+        expect(url).to eq("home.production.account.gov.uk")
+      end
+    end
+
+    context "when the GOVUK_ENVIRONMENT env var is set to production" do
+      around do |example|
+        ClimateControl.modify("GOVUK_ENVIRONMENT" => "production") do
+          example.run
+        end
+      end
+
+      it "returns the domain hostname" do
+        expect(url).to eq("home.account.gov.uk")
+      end
+    end
+
+    context "when the GOVUK_ENVIRONMENT env var is not set to production" do
+      around do |example|
+        ClimateControl.modify("GOVUK_ENVIRONMENT" => "test") do
+          example.run
+        end
+      end
+
+      it "constructs the hostname from the env var" do
+        expect(url).to eq("home.test.account.gov.uk")
+      end
+    end
+  end
 end
