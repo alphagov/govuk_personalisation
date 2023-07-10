@@ -1,6 +1,7 @@
-# Unreleased
+# 0.14.0
 
-* Drop support for Ruby 2.7.
+- Use GOVUK_ENVIRONMENT as a backstop for DIGITAL_IDENTITY_ENVIRONMENT ([#53](https://github.com/alphagov/govuk_personalisation/pull/53))
+- Drop Ruby 2.7 support ([#51](https://github.com/alphagov/govuk_personalisation/pull/51))
 
 # 0.13.0
 
