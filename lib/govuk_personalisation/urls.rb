@@ -95,11 +95,16 @@ module GovukPersonalisation::Urls
   #
   # @return [String] the domain
   def self.digital_identity_domain
-    environment = ENV["DIGITAL_IDENTITY_ENVIRONMENT"]
-    if environment
-      "home.#{environment}.account.gov.uk"
+    if digital_identity_environment
+      "home.#{digital_identity_environment}.account.gov.uk"
     else
       "home.account.gov.uk"
     end
+  end
+
+  def self.digital_identity_environment
+    return ENV["DIGITAL_IDENTITY_ENVIRONMENT"] if ENV["DIGITAL_IDENTITY_ENVIRONMENT"]
+
+    ENV["GOVUK_ENVIRONMENT"] == "production" ? nil : ENV["GOVUK_ENVIRONMENT"]
   end
 end
