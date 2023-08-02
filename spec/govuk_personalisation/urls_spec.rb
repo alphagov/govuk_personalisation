@@ -63,7 +63,7 @@ RSpec.describe GovukPersonalisation::Urls do
   end
 
   describe "#digital_identity_domain" do
-    subject(:url) { described_class.digital_identity_domain }
+    subject(:url) { described_class.digital_identity_domain("home") }
 
     it "returns the domain hostname" do
       expect(url).to eq("home.account.gov.uk")
