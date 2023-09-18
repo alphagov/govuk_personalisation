@@ -29,6 +29,10 @@ module GovukPersonalisation::Urls
     find_external_url(var: "ONE_LOGIN_YOUR_SERVICES", url: "https://#{digital_identity_domain('home')}")
   end
 
+  def self.your_account
+    one_login_your_services
+  end
+
   # Find the external URL for the "security" page on One Login
   #
   # @return [String] the URL
@@ -36,11 +40,23 @@ module GovukPersonalisation::Urls
     find_external_url(var: "ONE_LOGIN_SECURITY", url: "https://#{digital_identity_domain('home')}/security")
   end
 
+  def self.manage
+    one_login_security
+  end
+
+  def self.security
+    one_login_security
+  end
+
   # Find the external URL for the "feedback" page on One Login
   #
   # @return [String] the URL
   def self.one_login_feedback
     find_external_url(var: "ONE_LOGIN_FEEDBACK", url: "https://#{digital_identity_domain('signin')}/support?supportType=PUBLIC")
+  end
+
+  def self.feedback
+    one_login_feedback
   end
 
   # Finds a URL on www.gov.uk.  This method is used so we can have
