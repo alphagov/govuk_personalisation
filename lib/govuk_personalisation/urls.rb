@@ -22,32 +22,41 @@ module GovukPersonalisation::Urls
     find_govuk_url(var: "SIGN_OUT", application: "email-alert-frontend", path: "/email/manage")
   end
 
-  # Find the external URL for the "your account" page
+  # Find the external URL for the "your services" page on One Login
   #
   # @return [String] the URL
+  def self.one_login_your_services
+    find_external_url(var: "ONE_LOGIN_YOUR_SERVICES", url: "https://#{digital_identity_domain('home')}")
+  end
+
   def self.your_account
-    find_external_url(var: "YOUR_ACCOUNT", url: "https://#{digital_identity_domain}")
+    one_login_your_services
   end
 
-  # Find the external URL for the "manage" page
+  # Find the external URL for the "security" page on One Login
   #
   # @return [String] the URL
+  def self.one_login_security
+    find_external_url(var: "ONE_LOGIN_SECURITY", url: "https://#{digital_identity_domain('home')}/security")
+  end
+
   def self.manage
-    find_external_url(var: "MANAGE", url: "https://#{digital_identity_domain}?link=manage-account")
+    one_login_security
   end
 
-  # Find the external URL for the "security" page
-  #
-  # @return [String] the URL
   def self.security
-    find_external_url(var: "SECURITY", url: "https://#{digital_identity_domain}?link=security-privacy")
+    one_login_security
   end
 
-  # Find the external URL for the "feedback" page
+  # Find the external URL for the "feedback" page on One Login
   #
   # @return [String] the URL
+  def self.one_login_feedback
+    find_external_url(var: "ONE_LOGIN_FEEDBACK", url: "https://#{digital_identity_domain('signin')}/support?supportType=PUBLIC")
+  end
+
   def self.feedback
-    find_external_url(var: "FEEDBACK", url: "https://signin.account.gov.uk/support")
+    one_login_feedback
   end
 
   # Finds a URL on www.gov.uk.  This method is used so we can have
@@ -91,14 +100,11 @@ module GovukPersonalisation::Urls
     ENV.fetch("GOVUK_PERSONALISATION_#{var}_URI", url)
   end
 
-  # Gets the Digital Identity domain for the current environment
-  #
-  # @return [String] the domain
-  def self.digital_identity_domain
+  def self.digital_identity_domain(host)
     if digital_identity_environment
-      "home.#{digital_identity_environment}.account.gov.uk"
+      "#{host}.#{digital_identity_environment}.account.gov.uk"
     else
-      "home.account.gov.uk"
+      "#{host}.account.gov.uk"
     end
   end
 
