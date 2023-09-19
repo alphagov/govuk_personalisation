@@ -1,6 +1,7 @@
-# Unreleased
+# 0.15.0
 
 - Update URLs and method names for One Login ([#56](https://github.com/alphagov/govuk_personalisation/pull/56))
+- Note that this release deprecates the your_account, manage, security, and feedback methods of GovukPersonalisation::Urls, but retains them as aliases to allow easier transition. They will be removed in a later release.
 
 # 0.14.0
 
