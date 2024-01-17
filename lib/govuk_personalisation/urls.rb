@@ -101,16 +101,24 @@ module GovukPersonalisation::Urls
   end
 
   def self.digital_identity_domain(host)
-    if digital_identity_environment
-      "#{host}.#{digital_identity_environment}.account.gov.uk"
-    else
+    if ["production", nil].include?(digital_identity_environment)
       "#{host}.account.gov.uk"
+    else
+      "#{host}.#{digital_identity_environment}.account.gov.uk"
     end
   end
+
+  # DI/One Login's environments don't map exactly to ours - their staging points to
+  # our integration and vice versa. So translate here.
+  DIGITAL_IDENTITY_ENVIRONMENT_MAP = {
+    "production" => "production",
+    "staging" => "integration",
+    "integration" => "staging",
+  }.freeze
 
   def self.digital_identity_environment
     return ENV["DIGITAL_IDENTITY_ENVIRONMENT"] if ENV["DIGITAL_IDENTITY_ENVIRONMENT"]
 
-    ENV["GOVUK_ENVIRONMENT"] == "production" ? nil : ENV["GOVUK_ENVIRONMENT"]
+    DIGITAL_IDENTITY_ENVIRONMENT_MAP[ENV["GOVUK_ENVIRONMENT"]] || ENV["GOVUK_ENVIRONMENT"]
   end
 end

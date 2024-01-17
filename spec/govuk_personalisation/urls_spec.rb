@@ -71,13 +71,13 @@ RSpec.describe GovukPersonalisation::Urls do
 
     context "when the DIGITAL_IDENTITY_ENVIRONMENT env var is set" do
       around do |example|
-        ClimateControl.modify("DIGITAL_IDENTITY_ENVIRONMENT" => "production") do
+        ClimateControl.modify("DIGITAL_IDENTITY_ENVIRONMENT" => "load-test") do
           example.run
         end
       end
 
       it "constructs the hostname from the env var" do
-        expect(url).to eq("home.production.account.gov.uk")
+        expect(url).to eq("home.load-test.account.gov.uk")
       end
     end
 
@@ -93,7 +93,7 @@ RSpec.describe GovukPersonalisation::Urls do
       end
     end
 
-    context "when the GOVUK_ENVIRONMENT env var is not set to production" do
+    context "when the GOVUK_ENVIRONMENT env var is set to an arbitrary value" do
       around do |example|
         ClimateControl.modify("GOVUK_ENVIRONMENT" => "test") do
           example.run
@@ -102,6 +102,34 @@ RSpec.describe GovukPersonalisation::Urls do
 
       it "constructs the hostname from the env var" do
         expect(url).to eq("home.test.account.gov.uk")
+      end
+    end
+
+    # NOTE: staging and integration in One Login are inverted compared
+    # to GOV.UK (our staging has to point to their integration and
+    # vice versa). Don't try to "fix" the following two tests unless
+    # something has explicitly changed!
+    context "when the GOVUK_ENVIRONMENT env var is set to staging" do
+      around do |example|
+        ClimateControl.modify("GOVUK_ENVIRONMENT" => "staging") do
+          example.run
+        end
+      end
+
+      it "returns the domain hostname with integration" do
+        expect(url).to eq("home.integration.account.gov.uk")
+      end
+    end
+
+    context "when the GOVUK_ENVIRONMENT env var is set to integration" do
+      around do |example|
+        ClimateControl.modify("GOVUK_ENVIRONMENT" => "integration") do
+          example.run
+        end
+      end
+
+      it "returns the domain hostname with staging" do
+        expect(url).to eq("home.staging.account.gov.uk")
       end
     end
   end
