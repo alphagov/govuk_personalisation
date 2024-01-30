@@ -3,6 +3,11 @@
 ENV["RAILS_ENV"] = "test"
 ENV["RAILS_ROOT"] ||= "#{File.dirname(__FILE__)}../../../spec/test_app"
 
+require "simplecov"
+SimpleCov.start "rails" do
+  enable_coverage :branch
+end
+
 require File.expand_path("../spec/test_app/config/environment.rb", __dir__)
 require "rspec/rails"
 require "govuk_personalisation"
