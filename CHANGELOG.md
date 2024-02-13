@@ -1,3 +1,8 @@
+# Unreleased
+
+* Drop support for Ruby 3.0. The minimum required Ruby version is now 3.1.4.
+* Add support for Ruby 3.3.
+
 # 0.15.0
 
 - Update URLs and method names for One Login ([#56](https://github.com/alphagov/govuk_personalisation/pull/56))
