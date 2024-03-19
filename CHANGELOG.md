@@ -1,3 +1,8 @@
+# 0.16.0
+
+- Update minimum required Ruby version ([#67](https://github.com/alphagov/govuk_personalisation/pull/67))
+- Map our environments correctly to DI/One Login's environments. ([#63](https://github.com/alphagov/govuk_personalisation/pull/63))
+
 # 0.15.0
 
 - Update URLs and method names for One Login ([#56](https://github.com/alphagov/govuk_personalisation/pull/56))
