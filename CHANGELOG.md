@@ -1,3 +1,8 @@
+# 1.0.0
+
+- Release 1 (no code changes, so this is not breaking in practise). Gem has been in use
+  for long enough that we should not keep marking it as a 0.x version.
+
 # 0.16.0
 
 - Update minimum required Ruby version ([#67](https://github.com/alphagov/govuk_personalisation/pull/67))
