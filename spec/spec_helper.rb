@@ -4,7 +4,8 @@ ENV["RAILS_ENV"] = "test"
 ENV["RAILS_ROOT"] ||= "#{File.dirname(__FILE__)}../../../spec/test_app"
 
 require "simplecov"
-SimpleCov.start "rails" do
+SimpleCov.start do
+  add_filter "/spec/"
   enable_coverage :branch
 end
 
