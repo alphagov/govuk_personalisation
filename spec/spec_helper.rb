@@ -7,6 +7,7 @@ require "simplecov"
 SimpleCov.start do
   add_filter "/spec/"
   enable_coverage :branch
+  minimum_coverage line: 95
 end
 
 require File.expand_path("../spec/test_app/config/environment.rb", __dir__)
