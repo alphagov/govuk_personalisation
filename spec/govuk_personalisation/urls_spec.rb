@@ -1,6 +1,86 @@
 require "climate_control"
 
 RSpec.describe GovukPersonalisation::Urls do
+  describe "#sign_in" do
+    subject(:url) { described_class.sign_in }
+
+    it "returns the default sign in url" do
+      expect(url).to eq("http://www.dev.gov.uk/account")
+    end
+  end
+
+  describe "#sign_out" do
+    subject(:url) { described_class.sign_out }
+
+    it "returns the default sign out url" do
+      expect(url).to eq("http://www.dev.gov.uk/sign-out")
+    end
+  end
+
+  describe "#manage_email" do
+    subject(:url) { described_class.manage_email }
+
+    it "returns the default email management url" do
+      expect(url).to eq("http://www.dev.gov.uk/email/manage")
+    end
+  end
+
+  describe "#one_login_your_services" do
+    subject(:url) { described_class.one_login_your_services }
+
+    it "returns the external one login your services url" do
+      expect(url).to eq("https://home.account.gov.uk")
+    end
+  end
+
+  describe "#your_account" do
+    subject(:url) { described_class.your_account }
+
+    it "aliases #one_login_your_services to return the external one login account url" do
+      expect(url).to eq("https://home.account.gov.uk")
+    end
+  end
+
+  describe "#one_login_security" do
+    subject(:url) { described_class.one_login_security }
+
+    it "returns the external one login security url" do
+      expect(url).to eq("https://home.account.gov.uk/security")
+    end
+  end
+
+  describe "#manage" do
+    subject(:url) { described_class.manage }
+
+    it "aliases #one_login_security to return the external one login security url" do
+      expect(url).to eq("https://home.account.gov.uk/security")
+    end
+  end
+
+  describe "#security" do
+    subject(:url) { described_class.security }
+
+    it "aliases #one_login_security to return the external one login security url" do
+      expect(url).to eq("https://home.account.gov.uk/security")
+    end
+  end
+
+  describe "#one_login_feedback" do
+    subject(:url) { described_class.one_login_feedback }
+
+    it "returns the external one login feedback url" do
+      expect(url).to eq("https://signin.account.gov.uk/support?supportType=PUBLIC")
+    end
+  end
+
+  describe "#feedback" do
+    subject(:url) { described_class.feedback }
+
+    it "aliases #one_login_feedback to return the external one login feedback url" do
+      expect(url).to eq("https://signin.account.gov.uk/support?supportType=PUBLIC")
+    end
+  end
+
   describe "#find_govuk_url" do
     subject(:url) { described_class.find_govuk_url(var: var, application: application, path: path) }
 

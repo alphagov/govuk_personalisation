@@ -30,6 +30,15 @@ RSpec.describe GovukPersonalisation::Redirect do
       end
     end
 
+    context "with no existing query parameters in the base_url" do
+      let(:base_url) { "https://test.gov.uk/thing" }
+      let(:additional_params) { { _ga: "abc123", cookie_consent: "accept" } }
+
+      it "adds the parameters and maintains the existing base_url" do
+        expect(url).to eq("#{base_url}?_ga=abc123&cookie_consent=accept")
+      end
+    end
+
     it "redirects to the base url if no parameters are provided" do
       url = described_class.build_url(base_url)
       expect(url).to eq(base_url.to_s)
