@@ -136,7 +136,7 @@ module GovukPersonalisation
     #
     # @param url [String] The URL to redirect to
     def redirect_with_analytics(url, allow_other_host: true)
-      redirect_to(url_with_analytics(url), allow_other_host: allow_other_host)
+      redirect_to(url_with_analytics(url), allow_other_host:)
     end
 
     # Build a URL adding parameters necessary for cross-domain analytics
