@@ -8,7 +8,7 @@ RSpec.describe "Sessions", type: :request do
       let(:headers) { {} }
 
       it "shows the logged_in status and the 'GOVUK-Account-Session' header value" do
-        get show_session_path, headers: headers
+        get(show_session_path, headers:)
 
         expect(response).to have_http_status(:ok)
         expect(response_body).to eq("logged_in" => false, "account_session_header" => nil)
@@ -16,7 +16,7 @@ RSpec.describe "Sessions", type: :request do
       end
 
       it "does not make the response uncacheable" do
-        get show_session_path, headers: headers
+        get(show_session_path, headers:)
         expect(response.headers["Cache-Control"]).not_to eq("no-store")
       end
     end
@@ -26,7 +26,7 @@ RSpec.describe "Sessions", type: :request do
       let(:headers) { { "GOVUK-Account-Session" => account_session_header } }
 
       it "shows the logged_in status and the 'GOVUK-Account-Session' header value" do
-        get show_session_path, headers: headers
+        get(show_session_path, headers:)
 
         expect(response).to have_http_status(:ok)
         expect(response_body).to eq("logged_in" => true, "account_session_header" => account_session_header)
@@ -34,7 +34,7 @@ RSpec.describe "Sessions", type: :request do
       end
 
       it "does not make the response uncacheable" do
-        get show_session_path, headers: headers
+        get(show_session_path, headers:)
         expect(response.headers["Cache-Control"]).not_to eq("no-store")
       end
 
@@ -43,12 +43,12 @@ RSpec.describe "Sessions", type: :request do
         let(:session_id) { "foo" }
 
         it "returns an empty flash in the response" do
-          get show_session_path, headers: headers
+          get(show_session_path, headers:)
           expect(response.headers["GOVUK-Account-Session"]).to eq(session_id)
         end
 
         it "makes the response uncacheable" do
-          get show_session_path, headers: headers
+          get(show_session_path, headers:)
           expect(response.headers["Cache-Control"]).to eq("no-store")
         end
       end
