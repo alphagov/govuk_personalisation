@@ -2,6 +2,6 @@
 
 RSpec.describe GovukPersonalisation do
   it "has a version number" do
-    expect(GovukPersonalisation::VERSION).not_to be nil
+    expect(GovukPersonalisation::VERSION).not_to be_nil
   end
 end
