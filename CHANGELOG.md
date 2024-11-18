@@ -1,3 +1,7 @@
+# 1.1.0
+
+- Update Rails requirements to allow Rails 8 ([#85](https://github.com/alphagov/govuk_personalisation/pull/85))
+
 # 1.0.0
 
 - Release 1 (no code changes, so this is not breaking in practise). Gem has been in use
