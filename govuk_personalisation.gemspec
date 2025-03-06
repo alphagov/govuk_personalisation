@@ -33,6 +33,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "pry-byebug"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec-rails"
-  spec.add_development_dependency "rubocop-govuk", "5.0.8"
+  spec.add_development_dependency "rubocop-govuk", "5.0.9"
   spec.add_development_dependency "simplecov"
 end
