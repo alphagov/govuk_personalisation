@@ -1,3 +1,7 @@
+# 1.2.0
+
+- Update minimum required Ruby version([#135](https://github.com/alphagov/govuk_personalisation/pull/135))
+
 # 1.1.0
 
 - Update Rails requirements to allow Rails 8 ([#85](https://github.com/alphagov/govuk_personalisation/pull/85))
