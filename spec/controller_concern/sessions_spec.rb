@@ -12,7 +12,7 @@ RSpec.describe "Sessions", type: :request do
 
         expect(response).to have_http_status(:ok)
         expect(response_body).to eq("logged_in" => false, "account_session_header" => nil)
-        expect(response.headers["Vary"]).to eq("GOVUK-Account-Session")
+        expect(response.headers["Vary"]).to eq("GOVUK-Account-Session, Accept, X-Requested-With")
       end
 
       it "does not make the response uncacheable" do
@@ -30,7 +30,7 @@ RSpec.describe "Sessions", type: :request do
 
         expect(response).to have_http_status(:ok)
         expect(response_body).to eq("logged_in" => true, "account_session_header" => account_session_header)
-        expect(response.headers["Vary"]).to eq("GOVUK-Account-Session")
+        expect(response.headers["Vary"]).to eq("GOVUK-Account-Session, Accept, X-Requested-With")
       end
 
       it "does not make the response uncacheable" do
