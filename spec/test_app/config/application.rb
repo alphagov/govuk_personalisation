@@ -40,5 +40,8 @@ module TestApp
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # don't eager load in the dummy app
+    config.eager_load = false
   end
 end
